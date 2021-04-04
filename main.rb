@@ -1,10 +1,13 @@
 class Brave
     
-  def initialize
-    @name = "テリー"
-    @hp = 500
-    @offense = 150
-    @defense = 100
+ # new演算子から渡された引数を受け取る
+ # paramsで一括で受け取る
+  def initialize(**params)
+    # 各パラメータをハッシュで取得
+    @name = params[:name]
+    @hp = params[:hp]
+    @offense = params[:offense]
+    @defense = params[:defense]
   end
 
   # nameのゲッター
@@ -29,7 +32,7 @@ class Brave
   
 end
 
-brave = Brave.new
+brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
 
 # initializeメソッドにより簡略化↓
 # brave.name = "テリー"
