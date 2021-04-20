@@ -29,8 +29,6 @@ class Brave
    
    cause_damage(target:monster, damage:damage)
    
-   monster.hp -= damage
-   
    puts "#{monster.name}の残りHPは#{monster.hp}だ"
   end
   
@@ -54,9 +52,9 @@ private
      attack_type = params[:attack_type]
      
     if attack_type == "special_attack"
-      calculate_special_attack - monster.defense
+      calculate_special_attack - target.defense
     else
-      @offense - monster.defense
+      @offense - target.defense
     end
   end
   
@@ -64,8 +62,8 @@ private
     damage = params[:damage]
     target = params[:target]
     
-    monster.hp -= damage
-    puts "#{monster.name}は#{damage}のダメージを受けた"
+    target.hp -= damage
+    puts "#{target.name}は#{damage}のダメージを受けた"
   end
   
   def calculate_special_attack
@@ -153,8 +151,10 @@ monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 100)
 brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
 
 
-brave.attack(monster)
-monster.attack(brave)
+loop do
+  brave.attack(monster)
+  monster.attack(brave)
+end
 
 # initializeメソッドにより簡略化↓
 # brave.name = "テリー"
